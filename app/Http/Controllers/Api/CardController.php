@@ -48,6 +48,9 @@ class CardController extends Controller
         return new CardResource($action->handle($id, $request->validated()));
     }
 
+    /**
+     * Update some parts of the specified resource in storage.
+     */
     public function putCard(int $id, CardRequest $request, CardUpdateAction $action) : CardResource
     {
         return new CardResource($action->handle($id, $request->validated()));
