@@ -2,6 +2,26 @@
 
 use Illuminate\Contracts\Http\Kernel;
 use Illuminate\Http\Request;
+use Elasticsearch\ClientBuilder;
+
+$client = ClientBuilder::create()
+    ->setHosts(['localhost:9200'])
+    ->build();
+
+// создаём клиент библиотеки elasticsearch для выполнения запросов    
+$data = $client->search([
+    'index' => 'users', // имя индекса
+    'type' => 'user', // тип
+    'body' => [
+        'query' => [
+            'match' => [
+                'site' => 'badcode.ru'
+            ]
+        ]
+    ]
+]);
+
+echo '<pre>', print_r($data, true), '</pre>';
 
 define('LARAVEL_START', microtime(true));
 
